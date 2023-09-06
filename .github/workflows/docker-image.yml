@@ -17,12 +17,12 @@ jobs:
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        aws-access-key-id: AKIA3DBFS6WPMRFX4T67
-        aws-secret-access-key: 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
+        aws-access-key-id: ${{secrets.AWS_ACCESS_KEY_ID}}
+        aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
         aws-region: us-east-1
 
     - name: Login to ECR
-      run: aws ecr-public get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin public.ecr.aws/g7k2b4t7
+      run: aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/g7k2b4t7
 
     - name: Build, tag and push the Docker image
       run: | 
